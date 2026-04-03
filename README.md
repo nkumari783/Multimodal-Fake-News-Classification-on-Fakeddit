@@ -16,6 +16,15 @@ A Streamlit demo app lets you load trained weights and classify new (headline, i
 ---
 # Project Overview
 
+## Why three model families?
+
+The goal was not only raw accuracy but understanding **how fusion behaves** under **class imbalance**, **long training**, and **limited Colab GPU** memory:
+
+- **Late fusion on logits** is modular and easy to interpret.
+- **Feature-level concatenation** is more expressive but heavier and more sensitive to optimization.
+- **CLIP** starts from a **pretrained joint vision–language space**, so alignment is not learned from scratch; richer fusion over embeddings can outperform simpler stacks when training is tuned.
+
+---
 ## Task and labels
 
 Each sample has a headline (`clean_title`) and an image. The target is one of **six** Fakeddit categories:
@@ -46,16 +55,6 @@ author, clean_title, created_utc, domain, hasImage, id,
 image_url, linked_submission_id, num_comments, score,
 subreddit, upvote_ratio, 6_way_label
 ```
-
-## Why three model families?
-
-The goal was not only raw accuracy but understanding **how fusion behaves** under **class imbalance**, **long training**, and **limited Colab GPU** memory:
-
-- **Late fusion on logits** is modular and easy to interpret.
-- **Feature-level concatenation** is more expressive but heavier and more sensitive to optimization.
-- **CLIP** starts from a **pretrained joint vision–language space**, so alignment is not learned from scratch; richer fusion over embeddings can outperform simpler stacks when training is tuned.
-
----
 
 ## Model 1: BERT + ResNet-50 (`bertandrestnet.ipynb`)
 
